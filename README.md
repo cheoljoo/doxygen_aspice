@@ -17,3 +17,8 @@ ASPICE document generator for all developers
 
 ## using tools : 
 - python / perl / mako
+
+## code beamer help
+- wkik : https://codebeamer.com/cb/wiki/8798
+- attatchment : https://codebeamer.com/cb/wiki/117612#section-Add+new+item+attachments
+- uri : https://codebeamer.com/cb/wiki/117612#section-Get+items+related+to+a+user
