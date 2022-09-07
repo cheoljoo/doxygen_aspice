@@ -139,7 +139,7 @@ def get_comment_of_prototype_from_api(d, main, sub, idx):
 
     return comment
 
-def recover_from_special_char(s):
+def recover_from_special_char(s,carriageReturn=' @n '):
     unusedCode = '''
     sub recover_special_code {
     my ($s) = @_;
@@ -151,13 +151,29 @@ def recover_from_special_char(s):
     $s =~ s/#\&#\=#\&\&alpha###/\@/g;
     return $s;
 }
+cga2nece.pl:99: $s =~ s/\{/#\+#\+#\+\+###/g;
+cga2nece.pl:100:        $s =~ s/\}/#\-#\-#\-\-###/g;
+cga2nece.pl:101:        $s =~ s/\\/#\=#\=#\=\=###/g;
+cga2nece.pl:102:        $s =~ s/\n/#\%#\%#\%\%###/g;
+cga2nece.pl:103:        $s =~ s/\"/#\&#\&#\&\&###/g;
+cga2nece.pl:110:        $s =~ s/#\+#\+#\+\+###/\{/g;
+cga2nece.pl:111:        $s =~ s/#\-#\-#\-\-###/\}/g;
+cga2nece.pl:112:        $s =~ s/#\=#\=#\=\=###/\\/g;
+cga2nece.pl:113:        $s =~ s/#\%#\%#\%\%###/\n/g;
+cga2nece.pl:114:        $s =~ s/#\&#\&#\&\&###/\"/g;
 '''
     s = s.replace('#+#+#++braceopen###','{')
     s = s.replace('#-#-#--braceclose###','}')
     s = s.replace('#=#=#==backslash###','\\')
-    s = s.replace('#%#%#%%return###',' @n ')
+    s = s.replace('#%#%#%%return###',carriageReturn)
     s = s.replace('#&#&#&&doublequotation###','"')
     s = s.replace('#&#=#&&alpha###','@')
+
+    s = s.replace('#+#+#++###','{')
+    s = s.replace('#-#-#--###','}')
+    s = s.replace('#=#=#==###','\\')
+    s = s.replace('#%#%#%%###',carriageReturn)
+    s = s.replace('#&#&#&&###','"')
     return s
     
 
@@ -595,7 +611,7 @@ def get_doc(indent,prefix,doc,debug="debug"):
             pass
         elif cmnt_t == 'plantuml':
             subAns += '\n```puml\n'
-            subAns += doc[k]['content'] + '\n'
+            subAns += recover_from_special_char(doc[k]['content'],carriageReturn='\n') + '\n'
             subAns += '```\n'
             ans += subAns
             subAns = ""

@@ -38,8 +38,8 @@ common:
 	make generate
 
 generate:
-	rm -rf ${DOXYASPICE_HOME}/gen/src
-	mkdir -p ${DOXYASPICE_HOME}/gen/src
+	#rm -rf ${DOXYASPICE_HOME}/gen/src
+	#mkdir -p ${DOXYASPICE_HOME}/gen/src
 	#bash ${DOXYASPICE_HOME}/tools/run-gen.sh
 	python3 ${DOXYASPICE_HOME}/tools/gen-code.py --key=test --input=${DOXYASPICE_HOME}/template/doc/doc.md.stcI --output=${DOXYASPICE_HOME}/gen/
 	#make output

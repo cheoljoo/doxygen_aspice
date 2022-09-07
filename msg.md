@@ -6,7 +6,8 @@
 - utils.py : 
     - get_doc() from 'doc' dictionary 
     - ref_doc_params()  returns dictionary with 'params' in 'doc'
-TODO:
 - modify and unify teh special characters
+    - add more functions in  recover_from_special_char()
+    - in case of plantuml , we use '\n' instead of ' @n '
 
 -----------------------
