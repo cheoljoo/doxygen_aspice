@@ -1,0 +1,71 @@
+<%!
+    from D import D
+    import utils
+%>
+
+<%
+    module_name = utils.capitalize_first(key)
+%>
+
+# ${module_name}
+
+# classes
+% for k in sorted(D['classes']):
+<% classvar = D['classes'][k] %>\
+${k}
+<%text>##</%text> class : ${classvar['name']}
+    % if 'brief' in D['classes'][k] and 'doc' in D['classes'][k]['brief']:
+- brief
+    ${utils.get_doc(indent=1,prefix='-',doc=D['classes'][k]['brief']['doc'],debug=classvar['name'])}
+    % endif
+    % if 'detailed' in D['classes'][k] and 'doc' in D['classes'][k]['detailed']:
+- detailed
+    ${utils.get_doc(indent=1,prefix='-',doc=D['classes'][k]['detailed']['doc'],debug=classvar['name'])}
+    % endif
+
+    % for m in ['public_methods','private_methods']:
+        % if m in classvar:
+<%text>###</%text> ${m} API
+<% methods = classvar[m]['members'] %>\
+            % for k2 in sorted(methods):
+<% detailDoc = None %>\
+<%text>####</%text> ${methods[k2]['name']} method
+                % if 'brief' in methods[k2] and 'doc' in methods[k2]['brief']:
+- brief
+    ${utils.get_doc(indent=1,prefix='-',doc=methods[k2]['brief']['doc'],debug=methods[k2]['name'])}
+                % endif
+                % if 'detailed' in methods[k2] and 'doc' in methods[k2]['detailed']:
+<% detailDoc = methods[k2]['detailed']['doc'] %>\
+- detailed
+    ${utils.get_doc(indent=1,prefix='-',doc=detailDoc,debug=methods[k2]['name'])}
+                % endif
+                % if 'parameters' in methods[k2] :
+<% params = methods[k2]['parameters'] %>\
+<%text>#####</%text> ${methods[k2]['name']} parameters
+                    % if len(params) == 0:
+- no parameter
+                    % endif
+                    % for p2 in sorted(params):
+- ${p2}
+                        % if 'type' in params[p2] :
+    - type : ${params[p2]['type']}
+                        % endif
+                        % if 'declaration_name' in params[p2] :
+    - name : ${params[p2]['declaration_name']}
+                        % endif
+<% detailDocParams = utils.ref_doc_params(detailDoc) %>\
+                        % if detailDocParams != None and 'parameters' in detailDocParams[p2] and '1' in detailDocParams[p2]['parameters'] and  'dir' in detailDocParams[p2]['parameters']['1'] :
+    - direction : ${detailDocParams[p2]['parameters']['1']['dir']}
+                        % endif
+                        % if detailDocParams != None and 'doc' in detailDocParams[p2]:
+    - description
+        ${utils.get_doc(indent=2,prefix='-',doc=detailDocParams[p2]['doc'])}
+                        % endif
+                    % endfor
+
+                % endif
+            % endfor
+        % endif
+
+    % endfor
+% endfor

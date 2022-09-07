@@ -1,5 +1,5 @@
 # doxygen_aspice
-ASPICE document generator for all developers
+ASPICE document generator for all python developers
 
 # who has the rights to use it
 - first of all , i do not want to use this project for reverse-engineering.
@@ -8,6 +8,13 @@ ASPICE document generator for all developers
   - doxygen supports plantuml to draw the sequence diagram and flow chart. it is more convenient to manage with git and edit/modify because this is based on only text.
 - this project wants to generates documents and update changes automatically with sychronized contents from source code.
 
+# how to run
+- ```make```
+    - basic imput : tools/D.py
+        - TODO : i will add how to make D.py from doxygen
+    - mako template file : template/doc/doc.md.stcI
+    - output : gen/doc.md
+
 # TODO
 - make a header file with doxygen comments as design notes
   - considering FIDL
@@ -15,7 +22,7 @@ ASPICE document generator for all developers
 - generate template for markdown and codebeamer wiki and plantuml png
 - upload these result to codebeamer
 
-## using tools : 
+## using tools
 - python / perl / mako
 
 ## code beamer help
