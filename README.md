@@ -10,17 +10,12 @@ ASPICE document generator for all python developers
 
 # how to run
 - ```make```
-    - basic imput : tools/D.py
-        - TODO : i will add how to make D.py from doxygen
-    - mako template file : template/doc/doc.md.stcI
-    - output : gen/doc.md
-
-# TODO
-- make a header file with doxygen comments as design notes
-  - considering FIDL
-- doxygen compile with PERLMOD and gathered all information for python
-- generate template for markdown and codebeamer wiki and plantuml png
-- upload these result to codebeamer
+    - sample source : ./doxygen/src
+    - make doxygen : ./doxygen/DOXYGEN_OUTPUT
+        - perlmod file : ./doxygen/DOXYGEN_OUTPUT/perlmod/DoxyDocs.pm
+    - tools/doxy2cga.pl : DoxyDocs.pm transfer to default.GV (for perl) and DB4python.data (for python)
+    - cp tools/DB4python.data tools/D.py -f    : because we use import D
+    - generate the markdown result through mako : ./gen/doc.md   from ./template/doc/doc.md.stcI
 
 ## using tools
 - python / perl / mako
@@ -29,3 +24,4 @@ ASPICE document generator for all python developers
 - wkik : https://codebeamer.com/cb/wiki/8798
 - attatchment : https://codebeamer.com/cb/wiki/117612#section-Add+new+item+attachments
 - uri : https://codebeamer.com/cb/wiki/117612#section-Get+items+related+to+a+user
+
